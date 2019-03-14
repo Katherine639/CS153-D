@@ -30,9 +30,6 @@ void shminit() {
 
 int shm_open(int id, char **pointer) {
 
-//you write this
-
-
 
 
 return 0; //added to remove compiler warning -- you should decide what to return

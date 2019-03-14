@@ -186,10 +186,6 @@ void            switchkvm(void);
 int             copyout(pde_t*, uint, void*, uint);
 void            clearpteu(pde_t *pgdir, char *uva);
 
-//made mappages visible (and removed static) to facilitate implementing shm
-int
-mappages(pde_t *pgdir, void *va, uint size, uint pa, int perm);
-
 //shm.c
 void shminit(void);
 int shm_open(int id, char **pointer);

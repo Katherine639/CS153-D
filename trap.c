@@ -78,6 +78,23 @@ trap(struct trapframe *tf)
     lapiceoi();
     break;
 
+//lab3
+  case T_PGFLT:
+	if((rcr2() > (STACKTOP - (myproc()->numPage*PGSIZE)))) {
+		panic("out of bounds");
+	}
+	else {
+		if(allocuvm(myproc()->pgdir, (STACKTOP - (myproc()->numPage+1) * PGSIZE), STACKTOP - (myproc()->numPage) * PGSIZE) == 0) {
+			cprintf("Allocuvm failed; # of pages allocated: %d\n", myproc()->numPage);
+			exit();
+		}
+		else {
+			myproc()->numPage += 1;
+			cprintf("Allocuvm success; # of pages allocated: %d\n", myproc()->numPage);
+		}
+	} 
+	break;
+
   //PAGEBREAK: 13
   default:
     if(myproc() == 0 || (tf->cs&3) == 0){
